@@ -3,7 +3,7 @@
 // @namespace    https://github.com/TBXark/chatgpt-prompts-helper
 // @author       TBXark
 // @homepageURL  https://github.com/TBXark/chatgpt-prompts-helper
-// @version      1.1.0
+// @version      1.1.1
 // @description  Show prompts for ChatGPT
 // @match        https://chat.openai.com/*
 // @match        https://bard.google.com/*
@@ -91,6 +91,18 @@
 
   list.appendChild(segmentFilter);
 
+  /**
+   *  Event Listeners
+   */
+
+  let listVisible = false;
+  let isDragging = false;
+  let isMoving = false;
+  let dragStartX;
+  let dragStartY;
+  let buttonStartX;
+  let buttonStartY;
+
   const createListItem = (title, subtitle, content) => {
     const listItem = document.createElement("div");
     listItem.classList.add("chatgpt-prompt-helper-list-item");
@@ -131,14 +143,6 @@
 
     return listItem;
   };
-
-  let listVisible = false;
-  let isDragging = false;
-  let isMoving = false;
-  let dragStartX;
-  let dragStartY;
-  let buttonStartX;
-  let buttonStartY;
 
   function updateListPosition() {
     list.style.top = `${button.offsetTop - list.offsetHeight}px`;
@@ -187,6 +191,9 @@
     isDragging = false;
   });
 
+  /**
+   *  Style
+   */
   const style = `
     .chatgpt-prompt-helper-button {
         position: fixed;
@@ -306,8 +313,45 @@
     }
   }
 
+  /**
+   *  Fetch
+   */
+
+  async function fetchWithCache(url, cacheKey, cacheTime) {
+    cacheKey = cacheKey || url;
+    if (window.localStorage) {
+      let cachedData = localStorage.getItem(cacheKey);
+      const cachedTime = localStorage.getItem(cacheKey + "_expires");
+      if (cachedTime && Date.now() > cachedTime) {
+        localStorage.removeItem(cacheKey);
+        localStorage.removeItem(cacheKey + "_expires");
+        cachedData = null;
+      }
+      if (cachedData) {
+        return Promise.resolve(JSON.parse(cachedData));
+      }
+    }
+
+    return fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (window.localStorage) {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+          if (cacheTime) {
+            localStorage.setItem(cacheKey + "_expires", Date.now() + cacheTime);
+          }
+        }
+        return data;
+      });
+  }
+
   function loadTemplates(url) {
-    fetch(url)
+    fetchWithCache(url, null, 60 * 60 * 24)
       .then((res) => res.json())
       .then((data) => {
         // list remove all children except segment filter
