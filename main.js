@@ -134,7 +134,8 @@
         itemContent.style.display === "none" ? "block" : "none";
     });
     itemContent.addEventListener("click", () => {
-      itemTitle.innerHTML = `${title} <strong>[copied!]<strong>`;
+      const copyiedTag = '<div class="chatgpt-prompt-helper-copyied">已复制</div>';
+      itemTitle.innerHTML = `${title} ${copyiedTag}`;
       setTimeout(() => {
         itemTitle.textContent = title;
       }, 2000);
@@ -278,20 +279,32 @@
         cursor: pointer;
         font-size: 16px;
         color: #222;
+        display: inline-flex;
+        align-items: center;
     }
 
     .chatgpt-prompt-helper-list-item-subtitle {
       cursor: pointer;
       font-size: 10px;
       color: #666;
-  }
-
+    }
 
     .chatgpt-prompt-helper-list-item-content {
         padding-top: 5px;
         cursor: pointer;
         font-size: 14px;
         color: #666;
+    }
+
+    .chatgpt-prompt-helper-copyied {
+      text-align: center;
+      line-height: 16px;
+      color: #000;
+      font-size: 10px;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 255, 0.2);
+      padding: 0 10px 0 10px;
+      margin-left: 5px;
     }
   `;
 
@@ -352,7 +365,6 @@
 
   function loadTemplates(url) {
     fetchWithCache(url, null, 60 * 60 * 24)
-      .then((res) => res.json())
       .then((data) => {
         // list remove all children except segment filter
         while (list.children.length > 1) {
