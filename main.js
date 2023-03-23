@@ -40,12 +40,12 @@
 
     const itemContent = document.createElement("div");
     itemContent.classList.add("chatgpt-prompt-helper-list-item-content");
+    itemContent.style.display = "none";
     itemContent.textContent = content;
     listItem.appendChild(itemContent);
 
     itemTitle.addEventListener("click", () => {
-      itemContent.style.display =
-        itemContent.style.display == "none" ? "block" : "none";
+      itemContent.style.display = itemContent.style.display === "none" ? "block" : "none";
     });
     itemContent.addEventListener("click", () => {
       itemTitle.innerHTML = `${title} <strong>[copied!]<strong>`;
@@ -172,7 +172,6 @@
     }
 
     .chatgpt-prompt-helper-list-item-content {
-        display: none;
         padding-top: 10px;
         font-size: 12px;
         cursor: pointer;
