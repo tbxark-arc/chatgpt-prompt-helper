@@ -28,6 +28,7 @@
 
   const list = document.createElement("div");
   list.classList.add("chatgpt-prompt-helper-list");
+  list.style.display = "none";
   document.body.appendChild(list);
 
   const segmentFilter = document.createElement("div");
@@ -73,8 +74,8 @@
       const segmentItems = document.getElementsByClassName(
         "chatgpt-prompt-helper-segment-filter-item"
       );
-      for (let j = 0; j < segmentItems.length; j++) {
-        segmentItems[j].classList.remove(
+      for (const item of segmentItems) {
+        item.classList.remove(
           "chatgpt-prompt-helper-segment-filter-item-active"
         );
       }
@@ -117,8 +118,7 @@
       itemSubtitle.classList.add("chatgpt-prompt-helper-list-item-subtitle");
       itemSubtitle.textContent = subtitle;
       itemSubtitle.addEventListener("click", () => {
-        itemContent.style.display =
-          itemContent.style.display === "none" ? "block" : "none";
+        toggleElement(itemContent);
       });
       listItem.appendChild(itemSubtitle);
     }
@@ -130,20 +130,21 @@
     listItem.appendChild(itemContent);
 
     itemTitle.addEventListener("click", () => {
-      itemContent.style.display =
-        itemContent.style.display === "none" ? "block" : "none";
+      toggleElement(itemContent);
     });
+
     itemContent.addEventListener("click", () => {
-      const copyiedTag = '<div class="chatgpt-prompt-helper-copyied">已复制</div>';
+      const copyiedTag =
+        '<div class="chatgpt-prompt-helper-copyied">已复制</div>';
       itemTitle.innerHTML = `${title} ${copyiedTag}`;
       setTimeout(() => {
         itemTitle.textContent = title;
       }, 2000);
 
-      const textareas = document.querySelectorAll('textarea');
+      const textareas = document.querySelectorAll("textarea");
       let maxWidth = 0;
       let widestTextarea = null;
-      textareas.forEach(function(textarea) {
+      textareas.forEach(function (textarea) {
         const width = textarea.offsetWidth;
         if (width > maxWidth) {
           maxWidth = width;
@@ -151,7 +152,7 @@
         }
       });
       if (widestTextarea) {
-        const event = new Event('input', { bubbles: true });  
+        const event = new Event("input", { bubbles: true });
         widestTextarea.dispatchEvent(event);
         widestTextarea.value = content;
       }
@@ -160,6 +161,10 @@
 
     return listItem;
   };
+
+  function toggleElement(element) {
+    element.style.display = element.style.display === "none" ? "block" : "none";
+  }
 
   function updateListPosition() {
     list.style.top = `${button.offsetTop - list.offsetHeight}px`;
@@ -173,12 +178,8 @@
       return;
     }
     listVisible = !listVisible;
-    if (listVisible) {
-      list.style.display = "block";
-      updateListPosition();
-    } else {
-      list.style.display = "none";
-    }
+    toggleElement(list);
+    updateListPosition();
   });
 
   button.addEventListener("mousedown", (event) => {
@@ -380,17 +381,16 @@
   }
 
   function loadTemplates(url) {
-    fetchWithCache(url, null, 60 * 60 * 24)
-      .then((data) => {
-        // list remove all children except segment filter
-        while (list.children.length > 1) {
-          list.removeChild(list.lastChild);
-        }
-        data.forEach((item) => {
-          const listItem = createListItem(item.act, item.sub, item.prompt);
-          list.appendChild(listItem);
-        });
+    fetchWithCache(url, null, 60 * 60 * 24).then((data) => {
+      // list remove all children except segment filter
+      while (list.children.length > 1) {
+        list.removeChild(list.lastChild);
+      }
+      data.forEach((item) => {
+        const listItem = createListItem(item.act, item.sub, item.prompt);
+        list.appendChild(listItem);
       });
+    });
   }
 
   loadTemplates(templateURL);
