@@ -205,7 +205,7 @@
     }
 
     .chatgpt-prompt-helper-segment-filter {
-        width: 300px;
+        width: 100%;
         height: 40px;
         overflow-x: scroll;
         background-color: #fff;
