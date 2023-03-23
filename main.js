@@ -139,6 +139,19 @@
       setTimeout(() => {
         itemTitle.textContent = title;
       }, 2000);
+
+      const textareas = document.querySelectorAll('textarea');
+      let maxWidth = 0;
+      let widestTextarea = null;
+      textareas.forEach(function(textarea) {
+        const width = textarea.offsetWidth;
+        if (width > maxWidth) {
+          maxWidth = width;
+          widestTextarea = textarea;
+        }
+      });
+      
+      widestTextarea.value = content;
       navigator.clipboard.writeText(content);
     });
 
