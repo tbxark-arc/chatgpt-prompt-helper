@@ -77,10 +77,10 @@
     listVisible = !listVisible;
     if (listVisible) {
       list.style.display = "block";
+      updateListPosition();
     } else {
       list.style.display = "none";
     }
-    updateListPosition();
   });
 
   button.addEventListener("mousedown", (event) => {
@@ -133,6 +133,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     
     .chatgpt-prompt-helper-list {
