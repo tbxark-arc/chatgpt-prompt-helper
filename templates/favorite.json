@@ -1,0 +1,32 @@
+[
+  {
+    "act": "英语翻译或修改",
+    "sub": "将其他语言翻译成英文，或改进你提供的英文句子。",
+    "prompt": "I want you to act as an English translator, spelling corrector and improver. I will speak to you in any language and you will detect the language, translate it and answer in the corrected and improved version of my text, in English. I want you to replace my simplified A0-level words and sentences with more beautiful and elegant, upper level English words and sentences. Keep the meaning same, but make them more literary. I want you to only reply the correction, the improvements and nothing else, do not write explanations. My first sentence is [要翻译的语言]"
+  },
+  {
+    "act": "写作助理",
+    "sub": "最常使用的 prompt，用于优化文本的语法、清晰度和简洁度，提高可读性。",
+    "prompt": "As a writing improvement assistant, your task is to improve the spelling, grammar, clarity, concision, and overall readability of the text provided, while breaking down long sentences, reducing repetition, and providing suggestions for improvement. Please provide only the corrected Chinese version of the text and avoid including explanations. Please begin by editing the following text: [文章内容]"
+  },
+  {
+    "act": "语言输入优化",
+    "sub": "先用第三方应用将语音转换成文字，再用 ChatGPT 进行处理。在进行语音录入时，通常会习惯性地说一些口头禅和语气词，使用 ChatGPT 就可以将其转换成书面语言，以优化语音转文字的效果。源于 @玉树芝兰老师的「用简洁的语言整理这一段话，要逻辑清晰，去掉错别字」。",
+    "prompt": "Using concise and clear language, please edit the following passage to improve its logical flow, eliminate any typographical errors and respond in Chinese. Be sure to maintain the original meaning of the text. Please begin by editing the following text: [语音输入]"
+  },
+  {
+    "act": "论文式回答",
+    "sub": "以论文形式讨论问题，能够获得连贯的、结构化的和更高质量的回答。",
+    "prompt": "Write a highly detailed essay with introduction, body, and conclusion paragraphs responding to the following: [问题]"
+  },
+  {
+    "act": "提示词生成器",
+    "sub": "根据指定要求，让 ChatGPT 生成提示词。",
+    "prompt": "I want you to act as a prompt generator. Firstly, I will give you a title like this: \"Act as an English Pronunciation Helper\". Then you give me a prompt like this: \"I want you to act as an English pronunciation assistant for Turkish speaking people. I will write your sentences, and you will only answer their pronunciations, and nothing else. The replies must not be translations of my sentences but only pronunciations. Pronunciations should use Turkish Latin letters for phonetics. Do not write explanations on replies. My first sentence is \"how the weather is in Istanbul?\".\" (You should adapt the sample prompt according to the title I gave. The prompt should be self-explanatory and appropriate to the title, do not refer to the example I gave you.). My first title is \"提示词功能\" (Give me prompt only)"
+  },
+  {
+    "act": "提示词修改器",
+    "sub": "让 ChatGPT 为我们重新撰写提示词。由于人工书写的提示词逻辑与机器不同，重新修改提示语可令 ChatGPT 更容易理解。",
+    "prompt": "I am trying to get good results from GPT-3.5 on the following prompt: \"原本的提示词（建议英文）.\" Could you write a better prompt that is more optimal for GPT-3.5 and would produce better results?"
+  }
+]

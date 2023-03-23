@@ -8,7 +8,7 @@
 
 > 暂时只是满足个人需求，写的比较简单，有其他想法欢迎提交issue和pr。
 
-> 默认templates由 GaiZhenbiao/ChuanhuChatGPT 提供
+> 默认templates由 rockbenben/ChatGPT-Shortcut 提供
  
 ### TODO:
 - [ ] 添加使用说明

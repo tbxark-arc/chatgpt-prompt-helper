@@ -1,0 +1,27 @@
+[
+  {
+    "act": "阅读空气",
+    "sub": "对于一些无法理解的对话，提供对话背景让 AI 来进行解读。（仅中文版）",
+    "prompt": "我做了 [某个具体的事情]，有人回复我：“[回复内容]”。请问对方可能想表达什么意思？"
+  },
+  {
+    "act": "表达自检",
+    "sub": "当你的话经常被人误解，通过 AI 解读可以让你实现自我检查。（仅中文版）",
+    "prompt": "[某个具体的事情]，我说：“[回复内容]”。请问对方可能会如何理解我的意思？"
+  },
+  {
+    "act": "代为应答",
+    "sub": "当不知如何回复对方时，让 AI 进行回答。（仅中文版）",
+    "prompt": "今天发生了以下具体情况：[描述具体情况]，对方说：“[回复内容]”。请问对方可能想表达什么意思？你会怎样回应？"
+  },
+  {
+    "act": "小红书风格",
+    "sub": "用小红书风格改写文本",
+    "prompt": "Please edit the following passage in Chinese using the Xiaohongshu style, which is characterized by captivating headlines, the inclusion of emoticons in each paragraph, and the addition of relevant tags at the end. Be sure to maintain the original meaning of the text. Please begin by editing the following text: [小红书内容]"
+  },
+  {
+    "act": "周报生成器",
+    "sub": "根据日常工作内容，提取要点并适当扩充，以生成周报。",
+    "prompt": "Using the provided text below as the basis for a weekly report in Chinese, generate a concise summary that highlights the most important points. The report should be written in markdown format and should be easily readable and understandable for a general audience. In particular, focus on providing insights and analysis that would be useful to stakeholders and decision-makers. You may also use any additional information or sources as necessary. Please begin by editing the following text: [工作内容]"
+  }
+]

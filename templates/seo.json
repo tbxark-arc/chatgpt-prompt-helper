@@ -1,0 +1,22 @@
+[
+  {
+    "act": "页面 description",
+    "sub": "为页面内容生成 Meta description。",
+    "prompt": "Generate 5 unique meta descriptions, of a maximum of 150 characters, for the following text. They should be catchy with a call to action, including the term [主要关键词] in them: [页面内容]"
+  },
+  {
+    "act": "FAQs 生成器",
+    "sub": "基于内容生成常见问答。",
+    "prompt": "Generate a list of 10 frequently asked questions based on the following content: [内容]"
+  },
+  {
+    "act": "关键词热门相关",
+    "sub": "可用于了解用户对特定话题的关注点，或整理文章结构，亦可更改为「热门关键词」「热门话题」「热门品牌」「热门网站」等。",
+    "prompt": "Generate a list of 10 popular questions related to [关键词], that are relevant for [受众] and respond in Chinese"
+  },
+  {
+    "act": "伪原创改写",
+    "sub": "对指定内容进行多个版本的改写，以避免文本重复。",
+    "prompt": "Rephrase the following paragraph in 5 different ways, to avoid repetition, while keeping its meaning: [修改文本]"
+  }
+]

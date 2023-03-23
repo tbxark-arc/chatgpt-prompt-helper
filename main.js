@@ -3,7 +3,7 @@
 // @namespace    https://github.com/TBXark/chatgpt-prompts-helper
 // @author       TBXark
 // @homepageURL  https://github.com/TBXark/chatgpt-prompts-helper
-// @version      1.0.0
+// @version      1.1.0
 // @description  Show prompts for ChatGPT
 // @match        https://chat.openai.com/*
 // @match        https://bard.google.com/*
@@ -19,11 +19,72 @@
 (() => {
   // 这里可以替换成自己的模板,格式为 [{"act": "", "prompt": ""}]
   const templateURL =
-    "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/default.json";
+    "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/dev.json";
+
   const button = document.createElement("div");
   button.classList.add("chatgpt-prompt-helper-button");
   button.textContent = "📋";
   document.body.appendChild(button);
+
+  // 横行segment筛选器
+  const segmentFilter = document.createElement("div");
+  segmentFilter.classList.add("chatgpt-prompt-helper-segment-filter");
+  const segmentData = [
+    "favorite",
+    "language",
+    "write",
+    "article",
+    "ai",
+    "comments",
+    "text",
+    "seo",
+    "life",
+    "interesting",
+    "living",
+    "speech",
+    "mind",
+    "social",
+    "philosophy",
+    "teacher",
+    "code",
+    "interpreter",
+    "games",
+    "tool",
+    "company",
+    "doctor",
+    "finance",
+    "music",
+    "professional",
+    "contribute",
+    "personal",
+  ];
+  for (let i = 0; i < segmentData.length; i++) {
+    const segmentItem = document.createElement("div");
+    segmentItem.classList.add("chatgpt-prompt-helper-segment-filter-item");
+    segmentItem.textContent = segmentData[i];
+    segmentFilter.appendChild(segmentItem);
+    segmentItem.addEventListener("click", () => {
+      loadTemplates(
+        `https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/${segmentData[i]}.json`
+      );
+      const segmentItems = document.getElementsByClassName(
+        "chatgpt-prompt-helper-segment-filter-item"
+      );
+      for (let j = 0; j < segmentItems.length; j++) {
+        segmentItems[j].classList.remove(
+          "chatgpt-prompt-helper-segment-filter-item-active"
+        );
+      }
+      segmentItem.classList.add(
+        "chatgpt-prompt-helper-segment-filter-item-active"
+      );
+    });
+    if (i == 0) {
+      segmentItem.classList.add(
+        "chatgpt-prompt-helper-segment-filter-item-active"
+      );
+    }
+  }
 
   const list = document.createElement("div");
   list.classList.add("chatgpt-prompt-helper-list");
@@ -121,15 +182,6 @@
     isDragging = false;
   });
 
-  fetch(templateURL)
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((item) => {
-        const listItem = createListItem(item.act, item.sub, item.prompt);
-        list.appendChild(listItem);
-      });
-    });
-
   const style = `
     .chatgpt-prompt-helper-button {
         position: fixed;
@@ -150,6 +202,34 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+    }
+
+    .chatgpt-prompt-helper-segment-filter {
+        width: 300px;
+        height: 40px;
+        overflow-x: scroll;
+        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        z-index: 9999;        
+    }
+
+    .chatgpt-prompt-helper-segment-filter::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chatgpt-prompt-helper-segment-filter-item {
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: #FFF3F3;
+        border-radius: 15px;
+        margin: 0 5px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .chatgpt-prompt-helper-segment-filter-item-active {
+        background-color: #FFB6B6;
     }
     
     .chatgpt-prompt-helper-list {
@@ -219,4 +299,21 @@
       document.documentElement.appendChild(node);
     }
   }
+
+  function loadTemplates(url) {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        while (list.firstChild) {
+          list.removeChild(list.firstChild);
+        }
+        list.appendChild(segmentFilter);
+        data.forEach((item) => {
+          const listItem = createListItem(item.act, item.sub, item.prompt);
+          list.appendChild(listItem);
+        });
+      });
+  }
+
+  loadTemplates(templateURL);
 })();
