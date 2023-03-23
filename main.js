@@ -11,7 +11,7 @@
 (() => {
   // 这里可以替换成自己的模板,格式为 [{"act": "", "prompt": ""}]
   const templateURL =
-    "https://raw.githubusercontent.com/TBXark/chatgpt-prompts-helper/master/templates/default.json";
+    "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/default.json";
   const button = document.createElement("div");
   button.style.position = "fixed";
   button.style.width = "40px";
@@ -55,6 +55,7 @@
     itemTitle.style.fontWeight = "520";
     itemTitle.style.cursor = "pointer";
     itemTitle.style.fontSize = "14px";
+    itemTitle.style.color = "#666"
     itemTitle.textContent = title;
     listItem.appendChild(itemTitle);
 
@@ -63,6 +64,7 @@
     itemContent.style.paddingTop = "10px";
     itemContent.style.fontSize = "12px";
     itemContent.style.cursor = "pointer";
+    itemContent.style.color = "#333"
     itemContent.textContent = content;
     listItem.appendChild(itemContent);
 
