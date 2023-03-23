@@ -19,7 +19,7 @@
 (() => {
   // 这里可以替换成自己的模板,格式为 [{"act": "", "prompt": ""}]
   const templateURL =
-    "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/dev.json";
+    "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/favorite.json";
 
   const button = document.createElement("div");
   button.classList.add("chatgpt-prompt-helper-button");
