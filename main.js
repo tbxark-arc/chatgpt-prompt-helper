@@ -61,6 +61,7 @@
 
   let listVisible = false;
   let isDragging = false;
+  let isMoving = false
   let dragStartX;
   let dragStartY;
   let buttonStartX;
@@ -74,6 +75,9 @@
   }
 
   button.addEventListener("click", () => {
+    if (isMoving) {
+      return;
+    }
     listVisible = !listVisible;
     if (listVisible) {
       list.style.display = "block";
@@ -85,6 +89,7 @@
 
   button.addEventListener("mousedown", (event) => {
     isDragging = true;
+    isMoving = false
     dragStartX = event.clientX;
     dragStartY = event.clientY;
     buttonStartX = button.offsetLeft;
@@ -100,6 +105,7 @@
       const newButtonY = buttonStartY + offsetY;
       button.style.left = `${newButtonX}px`;
       button.style.top = `${newButtonY}px`;
+      isMoving = offsetX > 5 || offsetY > 5
       updateListPosition();
     }
   });
