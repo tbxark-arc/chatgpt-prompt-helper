@@ -150,8 +150,11 @@
           widestTextarea = textarea;
         }
       });
-      
-      widestTextarea.value = content;
+      if (widestTextarea) {
+        const event = new Event('input', { bubbles: true });  
+        widestTextarea.dispatchEvent(event);
+        widestTextarea.value = content;
+      }
       navigator.clipboard.writeText(content);
     });
 
