@@ -1,9 +1,12 @@
 // ==UserScript==
 // @name         ChatGPT-Prompt-Helper
 // @namespace    https://github.com/TBXark/chatgpt-prompts-helper
+// @author       TBXark
+// @homepageURL  https://github.com/TBXark/chatgpt-prompts-helper
 // @version      1.0.0
 // @description  Show prompts for ChatGPT
 // @match        https://chat.openai.com/*
+// @connect      raw.githubusercontent.com
 // ==/UserScript==
 
 // 如果你用了其他第三方的网站可以在复制第五行，然后粘贴在下面继续添加自己的网站 @match        https://chat.openai.com/*
