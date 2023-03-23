@@ -150,32 +150,31 @@
     
     .chatgpt-prompt-helper-list::-webkit-scrollbar-thumb {
         background-color: #ccc;
-        border-radius: 10px;
+        border-radius: 6px;
         border: none;
     }
 
     .chatgpt-prompt-helper-list::-webkit-scrollbar {
-        width: 10px;
+        width: 6px;
     }
 
     .chatgpt-prompt-helper-list-item {
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #eee;
         font-family: Arial, Helvetica, sans-serif;
         padding: 10px 0 10px 0;
     }
 
     .chatgpt-prompt-helper-list-item-title {
-        font-weight: 520;
         cursor: pointer;
         font-size: 14px;
-        color: #666;
+        color: #222;
     }
 
     .chatgpt-prompt-helper-list-item-content {
         padding-top: 10px;
         font-size: 12px;
         cursor: pointer;
-        color: #333;
+        color: #666;
     }
   `;
 
