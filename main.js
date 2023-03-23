@@ -29,7 +29,7 @@
   list.classList.add("chatgpt-prompt-helper-list");
   document.body.appendChild(list);
 
-  const createListItem = (title, content) => {
+  const createListItem = (title, subtitle, content) => {
     const listItem = document.createElement("div");
     listItem.classList.add("chatgpt-prompt-helper-list-item");
 
@@ -38,6 +38,13 @@
     itemTitle.textContent = title;
     listItem.appendChild(itemTitle);
 
+    if (subtitle) {
+      const itemSubtitle = document.createElement("div");
+      itemSubtitle.classList.add("chatgpt-prompt-helper-list-item-subtitle");
+      itemSubtitle.textContent = subtitle;
+      listItem.appendChild(itemSubtitle);
+    }
+
     const itemContent = document.createElement("div");
     itemContent.classList.add("chatgpt-prompt-helper-list-item-content");
     itemContent.style.display = "none";
@@ -45,7 +52,8 @@
     listItem.appendChild(itemContent);
 
     itemTitle.addEventListener("click", () => {
-      itemContent.style.display = itemContent.style.display === "none" ? "block" : "none";
+      itemContent.style.display =
+        itemContent.style.display === "none" ? "block" : "none";
     });
     itemContent.addEventListener("click", () => {
       itemTitle.innerHTML = `${title} <strong>[copied!]<strong>`;
@@ -58,10 +66,9 @@
     return listItem;
   };
 
-
   let listVisible = false;
   let isDragging = false;
-  let isMoving = false
+  let isMoving = false;
   let dragStartX;
   let dragStartY;
   let buttonStartX;
@@ -89,7 +96,7 @@
 
   button.addEventListener("mousedown", (event) => {
     isDragging = true;
-    isMoving = false
+    isMoving = false;
     dragStartX = event.clientX;
     dragStartY = event.clientY;
     buttonStartX = button.offsetLeft;
@@ -105,7 +112,7 @@
       const newButtonY = buttonStartY + offsetY;
       button.style.left = `${newButtonX}px`;
       button.style.top = `${newButtonY}px`;
-      isMoving = offsetX > 5 || offsetY > 5
+      isMoving = offsetX > 5 || offsetY > 5;
       updateListPosition();
     }
   });
@@ -114,14 +121,14 @@
     isDragging = false;
   });
 
-  fetch(templateURL).then((res) => {
-    res.json().then((data) => {
+  fetch(templateURL)
+    .then((res) => res.json())
+    .then((data) => {
       data.forEach((item) => {
-        const listItem = createListItem(item.act, item.prompt);
+        const listItem = createListItem(item.act, item.sub, item.prompt);
         list.appendChild(listItem);
       });
     });
-  });
 
   const style = `
     .chatgpt-prompt-helper-button {
@@ -176,14 +183,21 @@
 
     .chatgpt-prompt-helper-list-item-title {
         cursor: pointer;
-        font-size: 14px;
+        font-size: 16px;
         color: #222;
     }
 
+    .chatgpt-prompt-helper-list-item-subtitle {
+      cursor: pointer;
+      font-size: 10px;
+      color: #666;
+  }
+
+
     .chatgpt-prompt-helper-list-item-content {
         padding-top: 10px;
-        font-size: 12px;
         cursor: pointer;
+        font-size: 14px;
         color: #666;
     }
   `;
