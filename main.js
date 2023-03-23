@@ -32,6 +32,7 @@
   const segmentData = [
     "favorite",
     "language",
+    "code",
     "write",
     "article",
     "ai",
@@ -46,7 +47,6 @@
     "social",
     "philosophy",
     "teacher",
-    "code",
     "interpreter",
     "games",
     "tool",
@@ -223,6 +223,7 @@
         padding: 5px 10px;
         cursor: pointer;
         background-color: #FFF3F3;
+        color: #444;
         border-radius: 15px;
         margin: 0 5px;
         font-family: Arial, Helvetica, sans-serif;
