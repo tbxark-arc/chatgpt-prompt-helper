@@ -26,7 +26,10 @@
   button.textContent = "📋";
   document.body.appendChild(button);
 
-  // 横行segment筛选器
+  const list = document.createElement("div");
+  list.classList.add("chatgpt-prompt-helper-list");
+  document.body.appendChild(list);
+
   const segmentFilter = document.createElement("div");
   segmentFilter.classList.add("chatgpt-prompt-helper-segment-filter");
   const segmentData = [
@@ -86,9 +89,7 @@
     }
   }
 
-  const list = document.createElement("div");
-  list.classList.add("chatgpt-prompt-helper-list");
-  document.body.appendChild(list);
+  list.appendChild(segmentFilter);
 
   const createListItem = (title, subtitle, content) => {
     const listItem = document.createElement("div");
@@ -309,10 +310,10 @@
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        while (list.firstChild) {
-          list.removeChild(list.firstChild);
+        // list remove all children except segment filter
+        while (list.children.length > 1) {
+          list.removeChild(list.lastChild);
         }
-        list.appendChild(segmentFilter);
         data.forEach((item) => {
           const listItem = createListItem(item.act, item.sub, item.prompt);
           list.appendChild(listItem);
