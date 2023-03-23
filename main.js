@@ -6,68 +6,40 @@
 // @version      1.0.0
 // @description  Show prompts for ChatGPT
 // @match        https://chat.openai.com/*
+// @match        https://bard.google.com/*
+// @match        https://poe.com/*
 // @connect      raw.githubusercontent.com
+// @downloadURL  https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/main.js
+// @updateURL    https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/main.js
+// @grant        GM_addStyle
 // ==/UserScript==
 
-// 如果你用了其他第三方的网站可以在复制第五行，然后粘贴在下面继续添加自己的网站 @match        https://chat.openai.com/*
+// 如果你用了其他第三方的网站可以在复制第五行，然后粘贴在下面继续添加自己的网站 @match https://chat.openai.com/*
 
 (() => {
   // 这里可以替换成自己的模板,格式为 [{"act": "", "prompt": ""}]
   const templateURL =
     "https://raw.githubusercontent.com/TBXark/chatgpt-prompt-helper/master/templates/default.json";
   const button = document.createElement("div");
-  button.style.position = "fixed";
-  button.style.width = "40px";
-  button.style.height = "40px";
-  button.style.borderRadius = "20px";
-  button.style.backgroundColor = "#fff";
-  button.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
-  button.style.zIndex = "9999";
-  button.style.bottom = "80px";
-  button.style.right = "80px";
-  button.style.transform = "translateY(-50%)";
-  button.style.cursor = "move";
-  button.style.display = "flex";
-  button.style.justifyContent = "center";
-  button.style.alignItems = "center";
+  button.classList.add("chatgpt-prompt-helper-button");
   button.textContent = "📋";
+  document.body.appendChild(button);
 
   const list = document.createElement("div");
-  list.style.position = "fixed";
-  list.style.width = "300px";
-  list.style.height = "400px";
-  list.style.overflowY = "auto";
-  list.style.backgroundColor = "#fff";
-  list.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.2)";
-  list.style.zIndex = "9998";
-  list.style.display = "none";
-  list.style.borderRadius = "10px";
-  list.style.padding = "10px";
-  list.style.overflowY = "scroll";
-
+  list.classList.add("chatgpt-prompt-helper-list");
   document.body.appendChild(list);
-  document.body.appendChild(button);
 
   const createListItem = (title, content) => {
     const listItem = document.createElement("div");
-    listItem.style.borderBottom = "1px solid #ccc";
-    listItem.style.fontFamily = "Arial, Helvetica, sans-serif";
-    listItem.style.padding = "10px 0 10px 0";
+    listItem.classList.add("chatgpt-prompt-helper-list-item");
 
     const itemTitle = document.createElement("div");
-    itemTitle.style.fontWeight = "520";
-    itemTitle.style.cursor = "pointer";
-    itemTitle.style.fontSize = "14px";
-    itemTitle.style.color = "#666"
+    itemTitle.classList.add("chatgpt-prompt-helper-list-item-title");
     itemTitle.textContent = title;
     listItem.appendChild(itemTitle);
 
     const itemContent = document.createElement("div");
-    itemContent.style.display = "none";
-    itemContent.style.paddingTop = "10px";
-    itemContent.style.fontSize = "12px";
-    itemContent.style.cursor = "pointer";
-    itemContent.style.color = "#333"
+    itemContent.classList.add("chatgpt-prompt-helper-list-item-content");
     itemContent.textContent = content;
     listItem.appendChild(itemContent);
 
@@ -86,7 +58,6 @@
     return listItem;
   };
 
-  // Event
 
   let listVisible = false;
   let isDragging = false;
@@ -145,4 +116,85 @@
       });
     });
   });
+
+  const style = `
+    .chatgpt-prompt-helper-button {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        bottom: 80px;
+        right: 80px;
+        transform: translateY(-50%);
+        cursor: move;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .chatgpt-prompt-helper-list {
+        position: fixed;
+        width: 300px;
+        height: 400px;
+        overflow-y: scroll;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 9998;
+        display: none;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .chatgpt-prompt-helper-list::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 10px;
+        border: none;
+    }
+
+    .chatgpt-prompt-helper-list::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    .chatgpt-prompt-helper-list-item {
+        border-bottom: 1px solid #ccc;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 10px 0 10px 0;
+    }
+
+    .chatgpt-prompt-helper-list-item-title {
+        font-weight: 520;
+        cursor: pointer;
+        font-size: 14px;
+        color: #666;
+    }
+
+    .chatgpt-prompt-helper-list-item-content {
+        display: none;
+        padding-top: 10px;
+        font-size: 12px;
+        cursor: pointer;
+        color: #333;
+    }
+  `;
+
+  if (typeof GM_addStyle != "undefined") {
+    GM_addStyle(style);
+  } else if (typeof PRO_addStyle != "undefined") {
+    PRO_addStyle(style);
+  } else if (typeof addStyle != "undefined") {
+    addStyle(style);
+  } else {
+    var node = document.createElement("style");
+    node.type = "text/css";
+    node.appendChild(document.createTextNode(style));
+    var heads = document.getElementsByTagName("head");
+    if (heads.length > 0) {
+      heads[0].appendChild(node);
+    } else {
+      document.documentElement.appendChild(node);
+    }
+  }
 })();
