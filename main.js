@@ -103,6 +103,10 @@
       const itemSubtitle = document.createElement("div");
       itemSubtitle.classList.add("chatgpt-prompt-helper-list-item-subtitle");
       itemSubtitle.textContent = subtitle;
+      itemSubtitle.addEventListener("click", () => {
+        itemContent.style.display =
+          itemContent.style.display === "none" ? "block" : "none";
+      });
       listItem.appendChild(itemSubtitle);
     }
 
@@ -276,7 +280,7 @@
 
 
     .chatgpt-prompt-helper-list-item-content {
-        padding-top: 10px;
+        padding-top: 5px;
         cursor: pointer;
         font-size: 14px;
         color: #666;

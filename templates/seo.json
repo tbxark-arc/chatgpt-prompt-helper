@@ -2,21 +2,21 @@
   {
     "act": "页面 description",
     "sub": "为页面内容生成 Meta description。",
-    "prompt": "Generate 5 unique meta descriptions, of a maximum of 150 characters, for the following text. They should be catchy with a call to action, including the term [主要关键词] in them: [页面内容]"
+    "prompt": "生成 5 个独特的元描述，最多 150 个字符，用于以下文本。它们应该是吸引人的，有行动号召力，包括 [主要关键词]：[页面内容]"
   },
   {
     "act": "FAQs 生成器",
     "sub": "基于内容生成常见问答。",
-    "prompt": "Generate a list of 10 frequently asked questions based on the following content: [内容]"
+    "prompt": "根据以下内容，生成一个 10 个常见问题的清单：[内容]"
   },
   {
     "act": "关键词热门相关",
     "sub": "可用于了解用户对特定话题的关注点，或整理文章结构，亦可更改为「热门关键词」「热门话题」「热门品牌」「热门网站」等。",
-    "prompt": "Generate a list of 10 popular questions related to [关键词], that are relevant for [受众] and respond in Chinese"
+    "prompt": "生成一个与 [关键词] 相关的 10 个热门问题清单，这些问题与 [受众] 有关，并用中文回答。"
   },
   {
     "act": "伪原创改写",
     "sub": "对指定内容进行多个版本的改写，以避免文本重复。",
-    "prompt": "Rephrase the following paragraph in 5 different ways, to avoid repetition, while keeping its meaning: [修改文本]"
+    "prompt": "用 5 种不同的方式改写以下段落，以避免重复，同时保持其含义：[修改文本] 。"
   }
 ]

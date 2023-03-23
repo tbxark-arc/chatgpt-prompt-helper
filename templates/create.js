@@ -1896,7 +1896,7 @@ for (const tag of tagsSet) {
         return {
             act: prompt.title,
             sub: prompt.remark,
-            prompt: prompt.description,
+            prompt: prompt.descn,
         }
     });
   fs.writeFileSync(`${tag}.json`, JSON.stringify(tagPrompts, null, 2))
